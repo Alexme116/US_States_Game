@@ -28,6 +28,9 @@ while len(statesGuessed) != 50 and gameIsOn:
             stateGuessed = State(state.state.values[0], state.x.values[0], state.y.values[0])
             statesGuessed.append(state.state.values[0])
         elif guess is None:
+            statesMissing = [state for state in statesFile.state if state not in statesGuessed]
+            statesMissing = pd.DataFrame(statesMissing)
+            statesMissing.to_csv("states_to_learn.csv")
             gameIsOn = False
     rep = False
 
